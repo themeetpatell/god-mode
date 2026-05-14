@@ -1,0 +1,35 @@
+{
+  "name": "@themeetpatel/god-mode-mcp",
+  "version": "1.1.0",
+  "description": "God Mode MCP server: deterministic model routing, specialist selection, persistent execution state, reusable prompts/resources, handoff briefs, and cost-aware roadmap orchestration.",
+  "type": "module",
+  "bin": {
+    "themeetpatel-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "config"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "inspect": "npx @modelcontextprotocol/inspector node dist/index.js",
+    "prepare": "npm run build",
+    "eval:routing": "tsx src/eval-routing.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "latest",
+    "zod": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "tsx": "latest",
+    "typescript": "latest"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "license": "MIT"
+}

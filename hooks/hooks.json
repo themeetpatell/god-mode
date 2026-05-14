@@ -1,0 +1,25 @@
+{
+  "_comment": "Optional hooks for the themeetpatel plugin. These print a small footer after each subagent run showing routing decisions and rough cost. Safe to remove if you prefer a quieter run.",
+  "PostToolUse": [
+    {
+      "matcher": "tool == \"Task\"",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/log-routing.js\""
+        }
+      ]
+    }
+  ],
+  "Stop": [
+    {
+      "matcher": "true",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/session-summary.js\""
+        }
+      ]
+    }
+  ]
+}

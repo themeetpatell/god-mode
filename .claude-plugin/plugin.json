@@ -1,0 +1,34 @@
+{
+  "name": "themeetpatel",
+  "version": "1.1.0",
+  "description": "Activate God Mode. AI Chief of Staff + Claude Code plugin + MCP server with specialist agents, production skills, routing, persistent roadmaps, prompt resources, and portable handoffs.",
+  "author": {
+    "name": "Meet Patel",
+    "url": "https://github.com/themeetpatel"
+  },
+  "license": "MIT",
+  "keywords": [
+    "aeo",
+    "agents",
+    "ceo",
+    "cto",
+    "geo",
+    "god-mode",
+    "growth",
+    "mcp",
+    "model-routing",
+    "orchestration",
+    "research",
+    "roadmap",
+    "security",
+    "seo",
+    "skills",
+    "tdd",
+    "token-optimization"
+  ],
+  "components": {
+    "agents": "./agents",
+    "skills": "./skills",
+    "commands": "./commands"
+  }
+}

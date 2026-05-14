@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "themeetpatel-god-mode": {
+      "command": "node",
+      "args": ["/ABSOLUTE/PATH/themeetpatel/mcp-server/dist/index.js"]
+    }
+  }
+}

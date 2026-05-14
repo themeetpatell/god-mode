@@ -1,0 +1,5 @@
+{"task": "Summarize this call transcript into five bullets", "expected": "haiku-4.5", "reason": "mechanical summary"}
+{"task": "Build a Next.js billing settings page with tests", "expected": "sonnet-4.6", "reason": "production code"}
+{"task": "Design the architecture for multi-tenant finance OS with audit controls", "expected": "opus-4.7", "reason": "architecture + compliance risk"}
+{"task": "Find why API latency spikes only under concurrent load", "expected": "opus-4.7", "reason": "hard debugging"}
+{"task": "Convert this markdown table to JSON", "expected": "haiku-4.5", "reason": "format conversion"}

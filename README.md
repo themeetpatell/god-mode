@@ -255,3 +255,4 @@ Built by Meet Patel (`themeetpatel`). Inspired by the **superpower** plugin patt
 
 > The point isn't to be the greatest AI plugin in history. The point is that the **discipline** the CEO enforces — right model, smallest context, ship the goal — compounds. Use it every day and the rest takes care of itself.
 # god-mode
+# god-mode

@@ -77,6 +77,9 @@ Model = cost/depth. Agent = domain behavior. Skill = repeatable workflow.
 - haiku-specialist — summaries, extraction, formatting, status
 - sonnet-engineer — production code, docs, normal analysis
 - opus-architect — architecture, hard debugging, security-risk decisions
+- verifier — proves work meets acceptance criteria (per task class)
+- context-curator — computes minimum viable context per worker before delegation
+- self-critic — finds plan blind spots before delegation (v1.4)
 - synthesizer — merge worker outputs into final deliverable
 
 ## Strategy and growth
@@ -133,6 +136,56 @@ export const SKILL_REGISTRY = `# God Mode Skill Registry
 - model-router
 - roadmap-builder
 - handoff
+- verification
+- context-curator
+- memory
+
+## v1.3.1 production additions (cognition + memory v2)
+- belief-register
+- tree-of-thought
+- episodic-memory
+- procedural-memory
+- memory-decay
+- few-shot-from-past
+
+## v1.3.1 production additions (collaboration + action)
+- hitl-checkpoint
+- pair-programming-mode
+- async-handoff
+
+## v1.3.1 production additions (trust)
+- provenance-chain
+- bias-detector
+
+## v1.3.1 production additions (cost + reflection)
+- budget-caps
+- semantic-cache
+- speculative-execution
+- daily-standup-auto
+- weekly-retro
+- quarterly-okr-check
+- skill-rot-detection
+- decision-review
+
+## v1.3.1 production additions (high-impact primitives)
+- why-now-detector
+- negative-space-scanner
+- dread-index
+- time-to-regret
+- argument-strength-scorer
+
+## v1.4 PREVIEW — scaffolds in repo, real backend lands v1.4-v1.5
+- team-memory                 (PREVIEW — sync mechanism in v1.5-v1.6)
+- cross-vendor-router         (PREVIEW — OpenAI/Google/Ollama adapters in v1.4)
+- computer-use-loop           (PREVIEW — needs runtime computer-use API)
+- watchers-triggers           (PREVIEW — cron works today; daemon in v1.5)
+- external-actions            (PREVIEW — per-connector adapters in v1.4-v1.5)
+- vision-roadmap              (PREVIEW — needs vision runtime)
+- voice-intake                (PREVIEW — needs audio transcription)
+- meeting-recording-pipeline  (PREVIEW — composite of voice-intake + external-actions)
+- screen-state-aware          (PREVIEW — needs runtime screen access)
+- code-as-image               (PREVIEW — needs vision runtime)
+See LAUNCH-PROFILE.md for the full production vs preview map.
 `;
 
 export function recommendSpecialist(task: string) {

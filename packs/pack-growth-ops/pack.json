@@ -1,0 +1,10 @@
+{
+  "name": "pack-growth-ops",
+  "version": "0.1.0",
+  "description": "God Mode pack for growth-ops practitioners. Funnel diagnostics, lifecycle automation, attribution, channel-benchmark library, founder-led distribution, and AEO/GEO-first content systems.",
+  "dependsOn": ["core"],
+  "icp": "Founder or growth lead running B2B SaaS or service GTM with funnel + lifecycle + attribution responsibilities",
+  "agents": ["./agents"],
+  "skills": ["./skills"],
+  "commands": ["./commands"]
+}

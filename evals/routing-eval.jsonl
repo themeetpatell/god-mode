@@ -3,3 +3,102 @@
 {"task": "Design the architecture for multi-tenant finance OS with audit controls", "expected": "opus-4.7", "reason": "architecture + compliance risk"}
 {"task": "Find why API latency spikes only under concurrent load", "expected": "opus-4.7", "reason": "hard debugging"}
 {"task": "Convert this markdown table to JSON", "expected": "haiku-4.5", "reason": "format conversion"}
+{"task": "List all functions exported from src/api/index.ts", "expected": "haiku-4.5", "reason": "listing"}
+{"task": "Classify these 200 support tickets into 6 categories", "expected": "haiku-4.5", "reason": "classification"}
+{"task": "Write a commit message for this diff", "expected": "haiku-4.5", "reason": "format/short writing"}
+{"task": "Convert this Markdown to HTML", "expected": "haiku-4.5", "reason": "format conversion"}
+{"task": "Extract every email address from this PDF", "expected": "haiku-4.5", "reason": "extraction"}
+{"task": "Generate a changelog line for this PR", "expected": "haiku-4.5", "reason": "format/short writing"}
+{"task": "Write a 3-sentence status update for standup", "expected": "haiku-4.5", "reason": "status"}
+{"task": "Lint this file and list issues", "expected": "haiku-4.5", "reason": "lint/syntactic"}
+{"task": "Rename all instances of foo to bar in this file", "expected": "haiku-4.5", "reason": "mechanical replace"}
+{"task": "Format this CSV into a clean table", "expected": "haiku-4.5", "reason": "format conversion"}
+{"task": "Implement a React component for a paginated user table", "expected": "sonnet-4.6", "reason": "production code"}
+{"task": "Refactor this 400-line module to use hooks", "expected": "sonnet-4.6", "reason": "refactor"}
+{"task": "Write unit tests for the userService module", "expected": "sonnet-4.6", "reason": "tests"}
+{"task": "Write a README for this CLI tool", "expected": "sonnet-4.6", "reason": "docs"}
+{"task": "Research the top 5 vector databases for a RAG app", "expected": "sonnet-4.6", "reason": "research"}
+{"task": "Debug why this stack trace fails on Windows but works on Mac", "expected": "sonnet-4.6", "reason": "debug straightforward"}
+{"task": "Implement OAuth login with Google in Next.js", "expected": "sonnet-4.6", "reason": "code feature"}
+{"task": "Read the auth module and explain what it does", "expected": "sonnet-4.6", "reason": "code read/explain"}
+{"task": "Write an API client wrapper for the Stripe SDK", "expected": "sonnet-4.6", "reason": "code"}
+{"task": "Create a runbook for the database failover procedure", "expected": "sonnet-4.6", "reason": "docs"}
+{"task": "Build a workflow automation for new lead intake", "expected": "sonnet-4.6", "reason": "workflow code"}
+{"task": "Design the data model for a multi-tenant CRM", "expected": "opus-4.7", "reason": "data model architecture"}
+{"task": "Choose between event-sourcing and CRUD for this finance system", "expected": "opus-4.7", "reason": "architecture decision"}
+{"task": "Audit our auth flow for security vulnerabilities", "expected": "opus-4.7", "reason": "security review"}
+{"task": "Diagnose this distributed race condition in our queue", "expected": "opus-4.7", "reason": "hard debugging"}
+{"task": "Design the threat model for our webhook endpoint", "expected": "opus-4.7", "reason": "threat model"}
+{"task": "Plan a zero-downtime migration from Postgres 13 to 16", "expected": "opus-4.7", "reason": "migration plan"}
+{"task": "Decide whether to split the billing service from the monolith", "expected": "opus-4.7", "reason": "architecture / consequence"}
+{"task": "Review this concurrency model for deadlock potential", "expected": "opus-4.7", "reason": "concurrency"}
+{"task": "Trace the root cause of yesterday's PII leak", "expected": "opus-4.7", "reason": "root cause / security"}
+{"task": "Decide pricing structure for the enterprise tier", "expected": "opus-4.7", "reason": "strategic decision"}
+{"task": "Summarize the architecture decision document into 5 bullets", "expected": "haiku-4.5", "reason": "summarize a doc, not making the decision", "adversarial": true}
+{"task": "Format the security review output into a JIRA-ready table", "expected": "haiku-4.5", "reason": "format only, no security analysis", "adversarial": true}
+{"task": "List the files touched by the database migration PR", "expected": "haiku-4.5", "reason": "listing only", "adversarial": true}
+{"task": "Refactor the security-review module's import order", "expected": "sonnet-4.6", "reason": "code refactor, not security", "adversarial": true}
+{"task": "Write a small utility function that handles retry logic", "expected": "sonnet-4.6", "reason": "code utility, not architecture", "adversarial": true}
+{"task": "Write a test for the race-condition fix Sonnet already shipped", "expected": "sonnet-4.6", "reason": "tests, not the hard debugging itself", "adversarial": true}
+{"task": "Decide whether 'classify' should be a verb or noun in our API", "expected": "opus-4.7", "reason": "decision (consequence) despite haiku-keyword", "adversarial": true}
+{"task": "Explain why this is not a race condition", "expected": "sonnet-4.6", "reason": "explanation, not active hard debugging", "adversarial": true}
+{"task": "Rename our 'architecture' folder to 'system' across the repo", "expected": "haiku-4.5", "reason": "mechanical rename, not architecture decision", "adversarial": true}
+{"task": "Convert the security audit findings from Markdown to CSV", "expected": "haiku-4.5", "reason": "format conversion, not security work", "adversarial": true}
+{"task": "Write a PRD for our checkout flow", "expected": "sonnet-4.6", "reason": "prose writing"}
+{"task": "Draft a LinkedIn post about our launch", "expected": "sonnet-4.6", "reason": "prose writing"}
+{"task": "Create a 90-day GTM plan for the UAE market", "expected": "opus-4.7", "reason": "strategic multi-constraint"}
+{"task": "Decide which 3 features to cut from the MVP to ship in 4 weeks", "expected": "opus-4.7", "reason": "irreversible product decision"}
+{"task": "Outline a 5-step onboarding flow for new SMB customers", "expected": "sonnet-4.6", "reason": "structured prose"}
+{"task": "Write a cold email sequence for partnership outreach", "expected": "sonnet-4.6", "reason": "copy"}
+{"task": "Implement Playwright tests for the signup flow", "expected": "sonnet-4.6", "reason": "tests / code"}
+{"task": "Audit the database schema for compliance with GDPR", "expected": "opus-4.7", "reason": "compliance + security"}
+{"task": "Build the dashboard component using shadcn/ui", "expected": "sonnet-4.6", "reason": "component code"}
+{"task": "Write a one-line tagline for our website hero", "expected": "haiku-4.5", "reason": "tiny copy"}
+{"task": "Pick the right pricing model: per-seat vs usage-based", "expected": "opus-4.7", "reason": "irreversible strategic"}
+{"task": "Create a monthly board update doc from these notes", "expected": "sonnet-4.6", "reason": "prose synthesis"}
+{"task": "Generate three subject line variants for a follow-up email", "expected": "haiku-4.5", "reason": "tiny copy variants"}
+{"task": "Find the function that handles webhook signature verification and explain it", "expected": "sonnet-4.6", "reason": "code read / explain"}
+{"task": "Decide whether to use Cloudflare Workers or Lambda for this API", "expected": "opus-4.7", "reason": "architecture decision"}
+{"task": "Generate a list of 10 prospects matching our ICP from this CRM export", "expected": "haiku-4.5", "reason": "extraction / listing"}
+{"task": "Write the system prompt for a new specialist agent", "expected": "sonnet-4.6", "reason": "prose writing"}
+{"task": "Decide the data retention policy for our analytics events", "expected": "opus-4.7", "reason": "compliance-adjacent decision"}
+{"task": "Summarize this security review into 5 bullets for the team channel", "expected": "haiku-4.5", "reason": "summarization, not the security review itself", "adversarial": true}
+{"task": "Extract the architecture decisions from this PR description", "expected": "haiku-4.5", "reason": "extraction, not architecture work", "adversarial": true}
+{"task": "List the migration plan steps already documented in this file", "expected": "haiku-4.5", "reason": "listing, not migration planning", "adversarial": true}
+{"task": "Format the data model output as a markdown table", "expected": "haiku-4.5", "reason": "format conversion, not data model design", "adversarial": true}
+{"task": "Classify these 50 tickets by whether they mention 'compliance'", "expected": "haiku-4.5", "reason": "classification despite compliance keyword", "adversarial": true}
+{"task": "Convert this GDPR FAQ into JSON", "expected": "haiku-4.5", "reason": "format conversion despite GDPR keyword", "adversarial": true}
+{"task": "Rename our 'security-review' directory to 'security-audit'", "expected": "haiku-4.5", "reason": "mechanical rename", "adversarial": true}
+{"task": "Write a one-line tagline for our compliance product", "expected": "haiku-4.5", "reason": "tagline, despite compliance keyword", "adversarial": true}
+{"task": "Status update on this week's architecture work", "expected": "haiku-4.5", "reason": "status update format", "adversarial": true}
+{"task": "Commit message for the data model migration PR", "expected": "haiku-4.5", "reason": "commit message format", "adversarial": true}
+{"task": "Refactor the auth-middleware tests for readability", "expected": "sonnet-4.6", "reason": "refactor tests, not security work", "adversarial": true}
+{"task": "Implement a small utility that calculates payback months", "expected": "sonnet-4.6", "reason": "utility code, not strategic decision", "adversarial": true}
+{"task": "Write Playwright tests for the password reset flow", "expected": "sonnet-4.6", "reason": "tests, despite security context", "adversarial": true}
+{"task": "Explain why our retry logic is not a race condition", "expected": "sonnet-4.6", "reason": "explanation, not active hard-debug", "adversarial": true}
+{"task": "Implement the GDPR cookie banner component", "expected": "sonnet-4.6", "reason": "implementation, not compliance reasoning", "adversarial": true}
+{"task": "Write docs for our retry-with-backoff helper", "expected": "sonnet-4.6", "reason": "docs", "adversarial": true}
+{"task": "Refactor the data-model.ts file to use Zod", "expected": "sonnet-4.6", "reason": "refactor, not data-model design", "adversarial": true}
+{"task": "Build a small dashboard component", "expected": "sonnet-4.6", "reason": "component code", "adversarial": true}
+{"task": "Write API docs for the threat-model.ts module", "expected": "sonnet-4.6", "reason": "docs, not threat modeling", "adversarial": true}
+{"task": "Implement retry logic for the security webhook handler", "expected": "sonnet-4.6", "reason": "implementation, not security review", "adversarial": true}
+{"task": "Decide whether to migrate from monolith to microservices", "expected": "opus-4.7", "reason": "irreversible architecture decision", "adversarial": true}
+{"task": "Choose between SAML and OIDC for enterprise SSO", "expected": "opus-4.7", "reason": "strategic choice with long-tail consequences", "adversarial": true}
+{"task": "Pick the right encryption-at-rest approach for our PII", "expected": "opus-4.7", "reason": "security + compliance decision", "adversarial": true}
+{"task": "Tradeoff analysis: build vs buy for our CDP", "expected": "opus-4.7", "reason": "multi-constraint reasoning", "adversarial": true}
+{"task": "Diagnose the deadlock our Postgres queries hit under load", "expected": "opus-4.7", "reason": "hard debugging", "adversarial": true}
+{"task": "Design the data retention policy for our analytics events", "expected": "opus-4.7", "reason": "compliance + irreversible"}
+{"task": "Architect the multi-region failover for our API", "expected": "opus-4.7", "reason": "architecture"}
+{"task": "Decide the chunking strategy for our 10M-doc RAG", "expected": "opus-4.7", "reason": "strategic with rework cost"}
+{"task": "Plan the zero-downtime migration from MySQL to Postgres", "expected": "opus-4.7", "reason": "migration plan"}
+{"task": "Choose between SSE and WebSockets for streaming", "expected": "opus-4.7", "reason": "architecture choice"}
+{"task": "List the SSE vs WebSockets pros/cons we already discussed", "expected": "haiku-4.5", "reason": "listing already-decided info", "adversarial": true}
+{"task": "Summarize our decision on encryption-at-rest into the ADR template", "expected": "haiku-4.5", "reason": "format/summary, decision was made elsewhere", "adversarial": true}
+{"task": "Extract the architecture diagram captions from this PDF", "expected": "haiku-4.5", "reason": "extraction", "adversarial": true}
+{"task": "Convert the security review findings from markdown to a Notion-friendly table", "expected": "haiku-4.5", "reason": "format", "adversarial": true}
+{"task": "Classify these incidents as 'root cause known' vs 'unknown'", "expected": "haiku-4.5", "reason": "classification despite root-cause keyword", "adversarial": true}
+{"task": "Decide whether to ship the rate-limit fix tonight or wait for Monday", "expected": "opus-4.7", "reason": "operational decision with downside risk", "adversarial": true}
+{"task": "Pick the right pricing model for our enterprise tier", "expected": "opus-4.7", "reason": "irreversible pricing decision"}
+{"task": "Choose between annual prepay and quarterly billing for SMB", "expected": "opus-4.7", "reason": "strategic choice"}
+{"task": "Diagnose why our LLM cost tripled last month", "expected": "opus-4.7", "reason": "hard root cause"}
+{"task": "Tradeoff analysis: own vs partner for the legal-doc verifier protocol", "expected": "opus-4.7", "reason": "multi-constraint decision"}

@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "updated_at": "2026-05-17T00:00:00Z",
+  "_comment": "Seed memory for Meet Patel. Copy to ~/.themeetpatel/memory/default.json and edit any fact that's drifted. Built from public context across the v1.3.1 sessions.",
+
+  "facts": {
+    "founder": {
+      "name": "Meet Patel",
+      "handle": "themeetpatel",
+      "linkedin": "https://www.linkedin.com/in/themeetpatel/",
+      "github": "https://github.com/themeetpatel",
+      "email": "meet@finanshels.com",
+      "location": "Dubai, UAE",
+      "voice_rules": [
+        "No contrast templates (\"it's not just X, it's Y\")",
+        "Specifics over abstractions — every claim has a number, name, or date",
+        "Operator-to-operator tone, not 'thought leader'",
+        "Lived proof in every founder post (≥ 4 concrete specifics on pieces > 200 words)",
+        "No AI-tells: no 'in a world where', 'let's dive into', 'leverage' (non-literal), 'navigate' (non-literal), 'empower', 'reach out', 'circling back', 'per my last email'",
+        "No em-dash sentences without a specific noun on each side",
+        "Friday afternoon: don't publish (UAE weekend cadence)",
+        "Length: LinkedIn posts 1200-2200 chars; newsletters 800-1800 words"
+      ],
+      "publishes_on": ["LinkedIn", "Newsletter (when active)"],
+      "no_post_windows": ["Friday afternoon GST", "Ramadan iftar hours"]
+    },
+
+    "companies": {
+      "finanshels": {
+        "role": "Founder / CEO",
+        "category": "UAE accounting + finance ops SaaS for SMBs",
+        "stage": "early revenue",
+        "icp": "UAE/GCC SMB finance ops leads (10-50 employees) in finance/services sector",
+        "icp_pain": "month-end close stress, e-invoicing mandate, AR collection drag",
+        "pricing_smb": "AED-denominated, monthly, no setup fee",
+        "buying_trigger": "FTA e-invoicing rollout + new corporate-tax filing season"
+      },
+      "biggdate": {
+        "role": "Founder",
+        "category": "Dating / soulmap product",
+        "stage": "early"
+      },
+      "soulmap": { "role": "Founder", "stage": "early" },
+      "zerohuman": { "role": "Founder", "stage": "early" },
+      "biggfam": { "role": "Founder", "stage": "early" },
+      "medicore-hms": { "role": "Founder", "stage": "early" },
+      "biggbizz": { "role": "Founder", "stage": "early" },
+      "startupos": { "role": "Founder", "stage": "early" },
+      "the-operators-edge": { "role": "Founder / content brand", "stage": "active" }
+    },
+
+    "stack_defaults": {
+      "frontend": "Next.js 14 (App Router)",
+      "styling": "Tailwind + shadcn/ui",
+      "backend": "Node + TypeScript",
+      "db_default": "Supabase Postgres",
+      "auth": "Supabase Auth or OAuth (Google) depending on product",
+      "deploy": "Vercel",
+      "monitoring": "Sentry + Better Stack",
+      "ci": "GitHub Actions",
+      "ai": "Anthropic Claude (Sonnet default, Haiku for cheap, Opus for hard)",
+      "comms_with_team": "WhatsApp + Slack",
+      "comms_with_uae_smb_customers": "WhatsApp first, email second",
+      "comms_with_global_b2b": "LinkedIn first, email second"
+    },
+
+    "preferences": {
+      "default_model_for_writing": "sonnet",
+      "default_model_for_decisions": "opus",
+      "default_model_for_summaries": "haiku",
+      "ship_over_perfect": true,
+      "verbose_responses": false,
+      "preferred_currency_display": "AED for UAE work, USD for global",
+      "timezone": "Asia/Dubai (GST, UTC+4)"
+    },
+
+    "decisions_locked_in": [
+      {
+        "id": "d-001",
+        "date": "2026-05-17",
+        "decision": "Ship God Mode v1.3.1 (production) before v1.4 (preview wired)",
+        "rationale": "Avoid trust hits from scaffold skills; let real user feedback shape v1.4 priority"
+      },
+      {
+        "id": "d-002",
+        "date": "2026-05-17",
+        "decision": "Open-source God Mode under MIT; future hosted SaaS as open-core",
+        "rationale": "Network effects from federated learning + hosted convenience fund maintenance; OSS plugin stays free forever"
+      }
+    ],
+
+    "do_not": [
+      "Suggest LinkedIn campaigns on Friday afternoon (UAE weekend)",
+      "Recommend SaaS tools without checking integration with Supabase first",
+      "Use stock-photo testimonials in landing page designs",
+      "Pitch in the first message on cold WhatsApp (warm intros only)",
+      "Mass-broadcast in WhatsApp groups (instant ban + reputation hit)",
+      "Quote benchmarks without a range or source",
+      "Auto-write to team or external systems without explicit approval",
+      "Publish founder content with > 2 anti-AI patterns",
+      "Send cold email without a real personalization signal"
+    ]
+  },
+
+  "open_threads": [
+    {
+      "id": "thread-001",
+      "topic": "God Mode public launch on LinkedIn",
+      "status": "pre-launch — repo + landing ready, screenshots + DMs pending",
+      "last_touched": "2026-05-17"
+    }
+  ]
+}

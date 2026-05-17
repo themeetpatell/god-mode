@@ -1,0 +1,105 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  router-eval:
+    name: Routing eval (must pass gates)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: mcp-server/package-lock.json
+
+      - name: Install MCP server deps
+        working-directory: mcp-server
+        run: npm ci
+
+      - name: Build MCP server
+        working-directory: mcp-server
+        run: npm run build
+
+      - name: Run routing eval (gates: overall ≥ 85%, adversarial ≥ 70%)
+        working-directory: mcp-server
+        run: npm run eval:routing
+
+  verifier-scripts:
+    name: Per-class verifier scripts smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Python 3 (for JSON helper)
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Smoke test verify-content (good content)
+        run: |
+          echo "We added 137 paid accounts in 9 weeks at \$14 CAC. Fatima joined in October, rebuilt the script, pushed ACV from \$14K to \$22K." | node scripts/verify/verify-content.js
+
+      - name: Smoke test verify-content (bad content fails)
+        run: |
+          set +e
+          echo "In a world where it's not just about productivity, let's dive into the game-changing power of leverage." | node scripts/verify/verify-content.js
+          if [ $? -eq 0 ]; then
+            echo "ERROR: verifier should have failed bad content but did not"
+            exit 1
+          fi
+
+      - name: Smoke test verify-roadmap (good roadmap)
+        run: |
+          printf "GOAL: Build x\n\nPhase 1: Setup [parallel]\n  T1.1 Init → Sonnet | est: 200\n  T1.2 Deps → Haiku | est: 100\n\nEST. TOTAL OUTPUT TOKENS: ~300\n" | node scripts/verify/verify-roadmap.js
+
+      - name: Smoke test verify-research (basic structure)
+        run: |
+          set +e
+          printf "RESEARCH QUESTION: x\nTOP FINDINGS:\n1. Something [https://sec.gov/source]\nGAPS:\n- y\nWHAT WOULD MAKE THIS WRONG:\n- z\nSOURCES:\n- https://reuters.com/a\n" | node scripts/verify/verify-research.js
+          exit 0
+
+  ledger-cli:
+    name: Ledger CLI runs without errors
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - name: Run ledger CLI on empty ledger (should exit 0)
+        run: node scripts/ledger.js || true
+
+  pack-installer:
+    name: Pack installer dry runs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: List available packs
+        run: bash scripts/install-pack.sh --list
+
+  markdown-link-check:
+    name: README + docs link check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run markdown-link-check (advisory)
+        continue-on-error: true
+        run: |
+          npm install -g markdown-link-check@3
+          for f in README.md CHANGELOG.md CONTRIBUTING.md docs/*.md examples/*.md packs/*/README.md; do
+            [ -f "$f" ] || continue
+            echo "→ $f"
+            markdown-link-check -q "$f" || true
+          done

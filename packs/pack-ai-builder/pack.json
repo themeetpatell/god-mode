@@ -1,0 +1,10 @@
+{
+  "name": "pack-ai-builder",
+  "version": "0.1.0",
+  "description": "God Mode pack for builders shipping AI-native products on Claude/OpenAI/MCP. Adds opinionated agents for MCP server design, eval harnesses, agent harnesses, prompt-debugging, and skill packaging.",
+  "dependsOn": ["core"],
+  "icp": "Engineer or technical founder building AI-native products on Claude, OpenAI, or MCP-compatible stacks",
+  "agents": ["./agents"],
+  "skills": ["./skills"],
+  "commands": ["./commands"]
+}

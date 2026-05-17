@@ -1,0 +1,52 @@
+display_information:
+  name: God Mode
+  description: AI Product CEO — roadmap, route, verify, ship. From your Slack.
+  background_color: "#7c5cff"
+features:
+  bot_user:
+    display_name: God Mode
+    always_online: true
+  slash_commands:
+    - command: /god-mode
+      url: https://YOUR-SERVER.example.com/slack/commands
+      description: Run a full God Mode session
+      usage_hint: "<your goal>"
+      should_escape: false
+    - command: /roadmap
+      url: https://YOUR-SERVER.example.com/slack/commands
+      description: Build a roadmap without executing
+      usage_hint: "<your goal>"
+      should_escape: false
+    - command: /handoff
+      url: https://YOUR-SERVER.example.com/slack/commands
+      description: Generate a handoff brief for the current thread
+      should_escape: false
+    - command: /status
+      url: https://YOUR-SERVER.example.com/slack/commands
+      description: Show current God Mode session state
+      should_escape: false
+oauth_config:
+  scopes:
+    bot:
+      - chat:write
+      - commands
+      - app_mentions:read
+      - channels:read
+      - groups:read
+      - im:history
+      - im:read
+      - im:write
+      - users:read
+      - files:read
+settings:
+  event_subscriptions:
+    request_url: https://YOUR-SERVER.example.com/slack/events
+    bot_events:
+      - app_mention
+      - message.im
+  interactivity:
+    is_enabled: true
+    request_url: https://YOUR-SERVER.example.com/slack/interactivity
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false

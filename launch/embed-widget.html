@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>God Mode — embeddable widget demo</title>
+<style>
+  body { font: 14px -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; padding: 24px; background: #f5f5f7; }
+  .demo-host { max-width: 900px; margin: 0 auto; background: white; padding: 24px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .demo-host h1 { font-size: 20px; margin: 0 0 12px; }
+  .demo-host p { color: #555; line-height: 1.6; }
+
+  /* The widget — drop this CSS + HTML into any page */
+  .gm-widget {
+    position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+    width: 360px; max-height: 540px;
+    background: #0a0a0f; color: #e8eaf0;
+    border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .gm-widget .gm-header {
+    background: #12131a; padding: 12px 16px; border-bottom: 1px solid #2a2d3a;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .gm-widget .gm-brand { font-weight: 600; }
+  .gm-widget .gm-brand .dot { color: #7c5cff; }
+  .gm-widget .gm-close { cursor: pointer; opacity: 0.6; }
+  .gm-widget .gm-body { padding: 14px 16px; flex: 1; overflow-y: auto; }
+  .gm-widget .gm-msg { margin-bottom: 10px; }
+  .gm-widget .gm-msg.user { color: #888b9a; font-size: 12px; }
+  .gm-widget .gm-msg.bot { background: #1a1c25; padding: 10px; border-radius: 8px; }
+  .gm-widget .gm-input { display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid #2a2d3a; background: #12131a; }
+  .gm-widget .gm-input input { flex: 1; background: #1a1c25; color: #e8eaf0; border: 1px solid #2a2d3a; border-radius: 6px; padding: 6px 10px; font-size: 13px; }
+  .gm-widget .gm-input button { background: #7c5cff; color: white; border: 0; padding: 6px 14px; border-radius: 6px; cursor: pointer; }
+  .gm-widget .gm-footer { padding: 8px 16px; font-size: 10px; color: #555; border-top: 1px solid #2a2d3a; text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="demo-host">
+  <h1>Host page — your product, your content, your app</h1>
+  <p>
+    This is a demo of the God Mode embeddable widget. It floats in the bottom-right.
+    Drop it on any web page and your users can run AI orchestration without leaving your product.
+  </p>
+  <p>
+    In v1.4 this is a scaffold UI. In v1.5 it connects to either:
+    <ol>
+      <li><strong>Self-hosted webhook ingress</strong> — embed config points at your <code>/v1/run</code> server</li>
+      <li><strong>Hosted SaaS</strong> — embed config points at the marketplace's hosted endpoint</li>
+    </ol>
+  </p>
+  <h2>Embedding</h2>
+  <pre style="background:#f7f7f9;padding:12px;border-radius:6px;font-size:12px;overflow-x:auto;">
+&lt;script src="https://cdn.themeetpatel.dev/widget/v1.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  GodMode.init({
+    server_url: "https://your-ingress.example.com",
+    token: "<from env / server-side, not in client code>",
+    default_goal_placeholder: "What can I help you ship?",
+    theme: "dark"
+  });
+&lt;/script&gt;
+  </pre>
+</div>
+
+<div class="gm-widget" id="gm-widget">
+  <div class="gm-header">
+    <div class="gm-brand"><span class="dot">●</span> God Mode</div>
+    <div class="gm-close" id="gm-close">×</div>
+  </div>
+  <div class="gm-body" id="gm-body">
+    <div class="gm-msg bot">Hi — what's the goal? Try "summarize this article for LinkedIn" or "audit this page for accessibility".</div>
+  </div>
+  <div class="gm-input">
+    <input id="gm-input" placeholder="Type your goal…" />
+    <button id="gm-send">Run</button>
+  </div>
+  <div class="gm-footer">Powered by God Mode · themeetpatel.dev</div>
+</div>
+
+<script>
+  // Minimal client (scaffold)
+  const input = document.getElementById('gm-input');
+  const body = document.getElementById('gm-body');
+  const send = document.getElementById('gm-send');
+  const close = document.getElementById('gm-close');
+  const widget = document.getElementById('gm-widget');
+
+  close.onclick = () => widget.style.display = 'none';
+  send.onclick = () => {
+    const text = input.value.trim();
+    if (!text) return;
+    const userMsg = document.createElement('div');
+    userMsg.className = 'gm-msg user';
+    userMsg.textContent = '> ' + text;
+    body.appendChild(userMsg);
+    input.value = '';
+    body.scrollTop = body.scrollHeight;
+
+    setTimeout(() => {
+      const botMsg = document.createElement('div');
+      botMsg.className = 'gm-msg bot';
+      botMsg.innerHTML = 'Scaffold v1.4 — in v1.5 this calls your configured <code>/v1/run</code> endpoint and streams the CEO loop here.';
+      body.appendChild(botMsg);
+      body.scrollTop = body.scrollHeight;
+    }, 400);
+  };
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter') send.click(); });
+</script>
+
+</body>
+</html>

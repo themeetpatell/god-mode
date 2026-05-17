@@ -22,8 +22,9 @@ const ROUGH_COSTS = {
 };
 
 try {
-  const cwd = process.env.CLAUDE_PROJECT_DIR || process.cwd();
-  const logPath = path.join(cwd, '.themeetpatel', 'routing.log');
+  const os = require('os');
+  const home = process.env.THEMEETPATEL_HOME || path.join(os.homedir(), '.themeetpatel');
+  const logPath = path.join(home, 'routing.log');
   if (!fs.existsSync(logPath)) process.exit(0);
 
   const lines = fs.readFileSync(logPath, 'utf8').trim().split('\n').filter(Boolean);

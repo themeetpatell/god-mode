@@ -1,0 +1,15 @@
+{
+  "name": "themeetpatel-god-mode-slack",
+  "version": "0.1.0",
+  "description": "Slack surface for God Mode — scaffold.",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@slack/bolt": "^3.21.0"
+  },
+  "engines": { "node": ">=20.0.0" },
+  "license": "MIT"
+}

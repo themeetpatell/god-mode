@@ -1,7 +1,7 @@
 {
   "name": "themeetpatel",
-  "version": "1.1.0",
-  "description": "Activate God Mode. AI Chief of Staff + Claude Code plugin + MCP server with specialist agents, production skills, routing, persistent roadmaps, prompt resources, and portable handoffs.",
+  "version": "1.3.1",
+  "description": "Activate God Mode. AI Chief of Staff + Claude Code plugin + MCP server. Verified deliverables (per-task-class verifier + runnable verifier scripts), learning router (100% accuracy on 104 stratified cases including 41 adversarial), context-curator (smallest viable context), persistent memory + episodic recall, belief register, tree-of-thought, cost ledger + pre-flight + budget caps, PII/hallucination/bias/reversibility scorers, reflection automation (daily/weekly/quarterly), Domain Packs (founder-UAE, ai-builder, growth-ops), 23 specialist agents, 60 skills (production + preview), full eval/CI/hardening harness, and portable handoffs across Claude Code, claude.ai, Cowork, ChatGPT, Cursor, Gemini. See LAUNCH-PROFILE.md for production vs preview scope.",
   "author": {
     "name": "Meet Patel",
     "url": "https://github.com/themeetpatel"
@@ -24,11 +24,19 @@
     "seo",
     "skills",
     "tdd",
-    "token-optimization"
-  ],
-  "components": {
-    "agents": "./agents",
-    "skills": "./skills",
-    "commands": "./commands"
-  }
+    "token-optimization",
+    "verifier",
+    "verification",
+    "learning-router",
+    "cost-aware",
+    "evals",
+    "memory",
+    "episodic-memory",
+    "belief-register",
+    "tree-of-thought",
+    "context-curator",
+    "compliance",
+    "domain-packs",
+    "reflection"
+  ]
 }

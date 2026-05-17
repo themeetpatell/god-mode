@@ -20,6 +20,8 @@ Most AI work today is one model doing every task — research, decisions, coding
 | `agents/haiku-specialist.md` | Fast lane (Haiku). Classify, summarize, format, list, status. |
 | `agents/sonnet-engineer.md` | Workhorse (Sonnet). Code, refactor, tests, docs, research, analysis. |
 | `agents/opus-architect.md` | Heavy artillery (Opus). Architecture, hard debugging, security, tradeoffs. |
+| `agents/verifier.md` | **v1.2** — proves a worker's deliverable against acceptance criteria (per-task-class verification). Run before synthesis. |
+| `agents/context-curator.md` | **NEW v1.3** — computes the minimum viable context per worker before delegation (commandment #2 enforcer). |
 | `agents/synthesizer.md` | Stitcher (Haiku). Merges worker outputs into the final deliverable. |
 | `agents/product-strategist.md` | Product strategy, PRDs, roadmap, MVP, monetization. |
 | `agents/growth-architect.md` | Demand engines, GTM, funnels, lifecycle, partnerships. |
@@ -40,6 +42,9 @@ Most AI work today is one model doing every task — research, decisions, coding
 | `skills/model-router/SKILL.md` | The routing matrix and decision algorithm. |
 | `skills/roadmap-builder/SKILL.md` | Decomposition heuristics for any goal shape. |
 | `skills/handoff/SKILL.md` | Generate paste-ready briefs to continue God Mode in any other tool. |
+| `skills/verification/SKILL.md` | **v1.2** — per-task-class verification workflow. The flagship skill that turns "shipped" into measurement. |
+| `skills/context-curator/SKILL.md` | **NEW v1.3** — minimum-viable-context computation per worker. Where the cost savings actually live. |
+| `skills/memory/SKILL.md` | **NEW v1.3** — read/write/refresh/prune protocol for `~/.themeetpatel/memory/`. Session N better than session 1. |
 | `skills/deep-research/SKILL.md` | Source-backed deep research workflow. |
 | `skills/codebase-audit/SKILL.md` | CTO-grade repo audit workflow. |
 | `skills/test-driven-development/SKILL.md` | Acceptance criteria → tests → implementation flow. |
@@ -146,7 +151,11 @@ Push this folder to a public GitHub repo, then:
 /plugin list themeetpatel@themeetpatel
 ```
 
-You should see 20 agents, 23 skills, 4 commands, plus the MCP server.
+You should see **23 agents, 60 skills, 4 commands**, plus the MCP server, plus 3 Domain Packs.
+
+**Of the 60 skills: 28 are production-quality (v1.3.1 launch), 32 are preview** (real files in the repo, but the underlying integration is scaffolded — production wiring lands in v1.4 over the next 4-6 weeks). Preview skills are tagged `preview: true` in their YAML frontmatter and carry a banner at the top of the file. See [LAUNCH-PROFILE.md](LAUNCH-PROFILE.md) for the full production-vs-preview map.
+
+You can install v1.3.1 with confidence today. Preview skills are visible to teach the v1.4+ roadmap; the CEO won't invoke them in production workflows unless the required runtime APIs exist.
 
 ### Use
 

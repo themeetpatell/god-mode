@@ -1,0 +1,13 @@
+{
+  "name": "pack-org-private-TEMPLATE",
+  "version": "0.1.0",
+  "description": "Template for org-private packs. Copy to packs/pack-<your-org>/ and edit.",
+  "dependsOn": ["core"],
+  "private": true,
+  "icp": "Internal use only — your organization",
+  "maintainer": "<name + role inside org>",
+  "compliance_required": [],
+  "agents": ["./agents"],
+  "skills": ["./skills"],
+  "commands": ["./commands"]
+}

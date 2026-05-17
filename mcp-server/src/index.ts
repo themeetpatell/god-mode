@@ -5,6 +5,35 @@ import { z } from "zod";
 import { routeTask, estimateSavings } from "./router.js";
 import { buildHandoffBrief, buildWorkerBrief, CEO_PROMPT, ROUTING_MATRIX, SPECIALIST_REGISTRY, SKILL_REGISTRY, recommendSpecialist } from "./prompts.js";
 import { listSessions, loadSession, saveSession, slugify, updateTask } from "./state.js";
+import { audit, checkBudget, recordUse, hashInput, requiresApproval } from "./audit.js";
+
+/**
+ * Wraps a tool handler with audit logging + budget enforcement.
+ * Returns a function with the same signature the SDK expects.
+ */
+function guarded<T extends (input: any) => Promise<any>>(toolName: string, handler: T): T {
+  return (async (input: any) => {
+    const sessionId = process.env.CLAUDE_SESSION_ID || "unknown-session";
+    const inputHash = hashInput(input);
+    const started = Date.now();
+
+    const budget = checkBudget(sessionId, toolName);
+    if (!budget.allowed) {
+      await audit({ session_id: sessionId, tool: toolName, input_hash: inputHash, status: "rate_limited", ms: Date.now() - started, reason: `budget exceeded (${budget.limit})` });
+      return { content: [{ type: "text", text: JSON.stringify({ status: "error", error: { code: "RATE_LIMITED", message: `Tool '${toolName}' exceeded session budget of ${budget.limit} calls`, retryable: false } }) }] };
+    }
+
+    try {
+      recordUse(sessionId, toolName);
+      const result = await handler(input);
+      await audit({ session_id: sessionId, tool: toolName, input_hash: inputHash, status: "ok", ms: Date.now() - started });
+      return result;
+    } catch (e) {
+      await audit({ session_id: sessionId, tool: toolName, input_hash: inputHash, status: "error", ms: Date.now() - started, reason: e instanceof Error ? e.message : String(e) });
+      return { content: [{ type: "text", text: JSON.stringify({ status: "error", error: { code: "INTERNAL_ERROR", message: e instanceof Error ? e.message : String(e), retryable: false } }) }] };
+    }
+  }) as T;
+}
 
 const server = new McpServer({
   name: "themeetpatel-god-mode",
@@ -26,10 +55,10 @@ server.registerTool("route_task", {
     contextTokens: z.number().int().nonnegative().optional(),
     outputTokens: z.number().int().nonnegative().optional()
   }
-}, async (input) => {
+}, guarded("route_task", async (input) => {
   const decision = routeTask(input);
   return { content: [{ type: "text", text: JSON.stringify(decision, null, 2) }] };
-});
+}));
 
 server.registerTool("create_roadmap", {
   title: "Create a routed roadmap",
@@ -40,7 +69,7 @@ server.registerTool("create_roadmap", {
     maxTasks: z.number().int().min(3).max(20).default(10),
     save: z.boolean().default(true)
   }
-}, async ({ goal, constraints, maxTasks, save }) => {
+}, guarded("create_roadmap", async ({ goal, constraints, maxTasks, save }: { goal: string; constraints?: string; maxTasks: number; save: boolean }) => {
   const phaseTemplates = [
     { phase: "Scope & Decisions", items: ["Clarify goal, assumptions, constraints", "Identify success criteria and risky decisions"] },
     { phase: "Build / Research / Produce", items: ["Execute core deliverable", "Create supporting assets or implementation details"] },
@@ -62,7 +91,7 @@ server.registerTool("create_roadmap", {
     saved = await saveSession({ id, title: goal.slice(0, 80), goal, assumptions: constraints ? [constraints] : [], decisions: [], tasks, artifacts: [] });
   }
   return { content: [{ type: "text", text: JSON.stringify({ roadmap, session: saved && { id: saved.id, path: `~/.themeetpatel/sessions/${saved.id}.json` } }, null, 2) }] };
-});
+}));
 
 server.registerTool("save_session", {
   title: "Save God Mode session",
@@ -76,22 +105,22 @@ server.registerTool("save_session", {
     tasks: z.array(z.object({ id: z.string(), title: z.string(), model: z.string().optional(), status: z.enum(["pending", "in_progress", "done", "blocked", "cancelled"]), dependsOn: z.array(z.string()).optional(), output: z.string().optional(), notes: z.string().optional() })).default([]),
     artifacts: z.array(z.string()).default([])
   }
-}, async (input) => {
+}, guarded("save_session", async (input: any) => {
   const state = await saveSession({ ...input, id: input.id ?? `${slugify(input.title)}-${Date.now().toString(36)}` });
   return { content: [{ type: "text", text: JSON.stringify({ saved: true, id: state.id, path: `~/.themeetpatel/sessions/${state.id}.json` }, null, 2) }] };
-});
+}));
 
 server.registerTool("load_session", {
   title: "Load God Mode session",
   description: "Load a saved roadmap/session by ID.",
   inputSchema: { id: z.string() }
-}, async ({ id }) => ({ content: [{ type: "text", text: JSON.stringify(await loadSession(id), null, 2) }] }));
+}, guarded("load_session", async ({ id }: { id: string }) => ({ content: [{ type: "text", text: JSON.stringify(await loadSession(id), null, 2) }] })));
 
 server.registerTool("list_sessions", {
   title: "List God Mode sessions",
   description: "List recent saved God Mode sessions.",
   inputSchema: {}
-}, async () => ({ content: [{ type: "text", text: JSON.stringify(await listSessions(), null, 2) }] }));
+}, guarded("list_sessions", async () => ({ content: [{ type: "text", text: JSON.stringify(await listSessions(), null, 2) }] })));
 
 server.registerTool("update_task_status", {
   title: "Update roadmap task status",
@@ -103,7 +132,7 @@ server.registerTool("update_task_status", {
     output: z.string().optional(),
     notes: z.string().optional()
   }
-}, async ({ sessionId, taskId, ...patch }) => ({ content: [{ type: "text", text: JSON.stringify(await updateTask(sessionId, taskId, patch), null, 2) }] }));
+}, guarded("update_task_status", async ({ sessionId, taskId, ...patch }: any) => ({ content: [{ type: "text", text: JSON.stringify(await updateTask(sessionId, taskId, patch), null, 2) }] })));
 
 
 
@@ -111,11 +140,11 @@ server.registerTool("recommend_specialist", {
   title: "Recommend God Mode specialist",
   description: "Choose the best specialist agent for a task after model routing.",
   inputSchema: { task: z.string().min(1) }
-}, async ({ task }) => {
+}, guarded("recommend_specialist", async ({ task }: { task: string }) => {
   const route = routeTask({ task });
   const specialist = recommendSpecialist(task);
   return { content: [{ type: "text", text: JSON.stringify({ task, model: route.model, specialist: specialist.agent, rationale: specialist.rationale, modelRationale: route.rationale }, null, 2) }] };
-});
+}));
 
 server.registerTool("create_handoff", {
   title: "Create portable handoff brief",
@@ -127,7 +156,7 @@ server.registerTool("create_handoff", {
     decisions: z.string().optional(),
     nextTask: z.string().optional()
   }
-}, async (input) => ({ content: [{ type: "text", text: buildHandoffBrief(input) }] }));
+}, guarded("create_handoff", async (input: any) => ({ content: [{ type: "text", text: buildHandoffBrief(input) }] })));
 
 server.registerTool("worker_brief", {
   title: "Create worker brief",
@@ -139,7 +168,7 @@ server.registerTool("worker_brief", {
     outputSpec: z.string().optional(),
     constraints: z.string().optional()
   }
-}, async (input) => ({ content: [{ type: "text", text: buildWorkerBrief(input) }] }));
+}, guarded("worker_brief", async (input: any) => ({ content: [{ type: "text", text: buildWorkerBrief(input) }] })));
 
 server.registerResource("routing_matrix", "themeetpatel://routing-matrix", {
   title: "God Mode Routing Matrix",

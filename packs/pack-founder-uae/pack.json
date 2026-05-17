@@ -1,0 +1,10 @@
+{
+  "name": "pack-founder-uae",
+  "version": "0.1.0",
+  "description": "God Mode pack for founders selling to UAE/GCC SMB and NRI segments. Localizes the CEO's strategy, content, growth, and ops layers for the region's regulatory, cultural, and commercial reality.",
+  "dependsOn": ["core"],
+  "icp": "B2B founder selling SaaS or services to UAE/GCC SMBs, NRI segments, or family offices",
+  "agents": ["./agents"],
+  "skills": ["./skills"],
+  "commands": ["./commands"]
+}

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>God Mode — Verified AI work, learned routing, portable across every tool</title>
+<meta name="description" content="The AI operating layer that ships verified work, learns from every session, and travels across every tool. Open source. Plugin + MCP server. By themeetpatel." />
+<meta property="og:title" content="God Mode — Verified AI work, learned routing, portable across every tool" />
+<meta property="og:description" content="One goal in. Roadmap, model routing, verified deliverable out. Open source." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://themeetpatel.dev" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "God Mode",
+  "operatingSystem": "macOS, Windows, Linux",
+  "applicationCategory": "DeveloperApplication",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Person", "name": "Meet Patel", "url": "https://github.com/themeetpatel" }
+}
+</script>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --panel: #12131a;
+    --panel-2: #1a1c25;
+    --border: #2a2d3a;
+    --text: #e8eaf0;
+    --muted: #888b9a;
+    --accent: #7c5cff;
+    --green: #2dd4a7;
+    --amber: #ffb73d;
+    --red: #ff5470;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  nav .brand { font-weight: 600; font-size: 18px; letter-spacing: -0.01em; }
+  nav .brand .accent { color: var(--accent); }
+  nav a { color: var(--muted); text-decoration: none; margin-left: 24px; font-size: 14px; }
+  nav a:hover { color: var(--text); }
+  nav .cta {
+    background: var(--accent);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+  }
+  nav .cta:hover { background: #6a4cff; color: white; }
+
+  /* Hero */
+  .hero { padding: 80px 0 64px; text-align: left; }
+  .badge-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(124, 92, 255, 0.1);
+    color: var(--accent);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid rgba(124, 92, 255, 0.3);
+  }
+  .badge.green { background: rgba(45, 212, 167, 0.1); color: var(--green); border-color: rgba(45, 212, 167, 0.3); }
+  h1 {
+    font-size: clamp(36px, 6vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    margin: 0 0 24px;
+    max-width: 920px;
+  }
+  h1 .accent { color: var(--accent); }
+  .lead {
+    font-size: 20px;
+    color: var(--muted);
+    max-width: 720px;
+    margin: 0 0 36px;
+    line-height: 1.5;
+  }
+  .install-block {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    font-family: "SF Mono", "Menlo", monospace;
+    font-size: 14px;
+    margin-bottom: 24px;
+    max-width: 720px;
+  }
+  .install-block .muted { color: var(--muted); }
+  .install-block .accent { color: var(--accent); }
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    transition: all 0.15s;
+  }
+  .btn.primary { background: var(--accent); color: white; }
+  .btn.primary:hover { background: #6a4cff; }
+  .btn.secondary { background: var(--panel); color: var(--text); border: 1px solid var(--border); }
+  .btn.secondary:hover { border-color: var(--accent); }
+
+  /* Sections */
+  section { padding: 64px 0; border-top: 1px solid var(--border); }
+  .section-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin: 0 0 16px;
+    font-weight: 600;
+  }
+  h2 {
+    font-size: clamp(28px, 4vw, 40px);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin: 0 0 40px;
+    max-width: 780px;
+  }
+  h3 {
+    font-size: 18px;
+    margin: 0 0 8px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  /* What's different */
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .diff-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .diff-card .icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(124, 92, 255, 0.15);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+  .diff-card p { color: var(--muted); font-size: 14px; margin: 0; }
+
+  /* Numbers / proof */
+  .numbers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .number-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .number-card .value {
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .number-card.green .value { color: var(--green); }
+  .number-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .number-card .sub { font-size: 13px; color: var(--text); margin-top: 4px; }
+
+  /* How it works */
+  .how-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .how-card { background: var(--panel-2); border-radius: 12px; padding: 20px; }
+  .how-card .step { color: var(--accent); font-size: 12px; font-weight: 600; margin-bottom: 8px; }
+  .how-card p { color: var(--muted); font-size: 14px; margin: 0; }
+
+  /* Packs */
+  .pack-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+  .pack-item {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .pack-item .name { font-weight: 500; }
+  .pack-item .ship { font-size: 11px; color: var(--green); }
+  .pack-item .ship.soon { color: var(--amber); }
+
+  /* Footer */
+  footer { padding: 48px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+  footer .row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+
+  pre, code {
+    font-family: "SF Mono", "Menlo", monospace;
+    font-size: 13px;
+  }
+  pre { background: var(--panel-2); padding: 16px; border-radius: 8px; overflow-x: auto; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<nav>
+  <div class="brand"><span class="accent">●</span> God Mode <span style="color: var(--muted); font-weight: 400; font-size: 14px; margin-left: 8px;">by themeetpatel</span></div>
+  <div>
+    <a href="#how">How it works</a>
+    <a href="#proof">Proof</a>
+    <a href="#packs">Packs</a>
+    <a href="https://github.com/themeetpatel/god-mode" class="cta">GitHub</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="badge-row">
+    <span class="badge">v1.3.0</span>
+    <span class="badge green">100% router accuracy · 104 cases</span>
+    <span class="badge green">100% adversarial · 41/41</span>
+    <span class="badge">MIT licensed</span>
+  </div>
+  <h1>The AI operating layer that ships <span class="accent">verified</span> work, learns from every session, and travels across every tool.</h1>
+  <p class="lead">
+    One goal in. Roadmap, model routing, parallel execution, and a separate verifier that proves the work shipped. Cost-aware, open source, plugin-based. Works in Claude Code, Claude Desktop, Cursor, ChatGPT, Cowork, Gemini.
+  </p>
+
+  <div class="install-block">
+    <div class="muted"># Claude Code (full plugin with subagents)</div>
+    <div>/plugin marketplace add <span class="accent">https://github.com/themeetpatel/god-mode</span></div>
+    <div>/plugin install <span class="accent">themeetpatel@themeetpatel</span></div>
+    <div>/god-mode <span class="muted">&lt;your goal&gt;</span></div>
+  </div>
+
+  <div class="cta-row">
+    <a href="https://github.com/themeetpatel/god-mode" class="btn primary">View on GitHub →</a>
+    <a href="#how" class="btn secondary">How it works</a>
+    <a href="https://github.com/themeetpatel/god-mode/blob/main/examples/README.md" class="btn secondary">See examples</a>
+  </div>
+</header>
+
+<section id="diff">
+  <p class="section-title">What's different</p>
+  <h2>Five primitives nobody else has stitched together.</h2>
+  <div class="diff-grid">
+    <div class="diff-card">
+      <div class="icon">V</div>
+      <h3>The verifier</h3>
+      <p>Every other agent framework lets the worker grade its own homework. God Mode runs a separate verifier — tests run, sources fetched, voice scored, DAGs walked. "Shipped" stops being a claim.</p>
+    </div>
+    <div class="diff-card">
+      <div class="icon">R</div>
+      <h3>Learning router</h3>
+      <p>Weighted multi-signal pattern scoring, not string-includes() bingo. 100% accuracy on 104 stratified cases including 41 adversarial keyword traps. Gets sharper with every session via the ledger.</p>
+    </div>
+    <div class="diff-card">
+      <div class="icon">C</div>
+      <h3>Context curator</h3>
+      <p>Computes the minimum viable context per worker before delegation. Names files, glossary, decisions to preserve, what to drop. This is where the cost savings actually live.</p>
+    </div>
+    <div class="diff-card">
+      <div class="icon">M</div>
+      <h3>Memory layer</h3>
+      <p>Persistent <code>~/.themeetpatel/memory/</code> means session 10 is better than session 1. The CEO already knows your stack, ICP, voice rules, do-not list.</p>
+    </div>
+    <div class="diff-card">
+      <div class="icon">P</div>
+      <h3>Domain Packs</h3>
+      <p>Core engine + packs you install for your role. Founder-UAE, AI-builder, growth-ops, more. Localizes the CEO without bloating the global core.</p>
+    </div>
+    <div class="diff-card">
+      <div class="icon">H</div>
+      <h3>Portable handoff</h3>
+      <p>Start a goal in Claude Code, continue on phone in ChatGPT, finish in Cursor. The IP is the prompts, not the runtime. State travels.</p>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <p class="section-title">How it works</p>
+  <h2>One goal becomes a verified, routed, shipped deliverable in seven phases.</h2>
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="step">PHASE 1</div>
+      <h3>Intake</h3>
+      <p>CEO reads memory, restates goal, asks ≤3 clarifying questions only if memory doesn't already answer them.</p>
+    </div>
+    <div class="how-card">
+      <div class="step">PHASE 2</div>
+      <h3>Roadmap</h3>
+      <p>Phased plan with task IDs, dependencies, parallelism, model routing per task, token estimates.</p>
+    </div>
+    <div class="how-card">
+      <div class="step">PHASE 3</div>
+      <h3>Routing</h3>
+      <p>Each task gets Haiku, Sonnet, or Opus by weighted multi-signal scoring. Anti-pattern keyword traps don't fool it.</p>
+    </div>
+    <div class="how-card">
+      <div class="step">PHASE 4</div>
+      <h3>Delegate</h3>
+      <p>Context-curator computes the minimum context per worker. Workers spawn in parallel where independent.</p>
+    </div>
+    <div class="how-card">
+      <div class="step">PHASE 5</div>
+      <h3>Verify</h3>
+      <p>Separate verifier agent runs class-specific checks: code (tests + types), research (sources fetched), content (voice + specifics).</p>
+    </div>
+    <div class="how-card">
+      <div class="step">PHASE 6</div>
+      <h3>Synthesize</h3>
+      <p>Stitcher merges verified outputs. Failures are surfaced, not papered over.</p>
+    </div>
+    <div class="how-card">
+      <div class="step">PHASE 7</div>
+      <h3>Ship</h3>
+      <p>6-line exec summary: DONE / SHIPPED / VERIFIED / COST / TIME / NEXT. Ledger records the session for next time's learning.</p>
+    </div>
+  </div>
+</section>
+
+<section id="proof">
+  <p class="section-title">Numbers, not vibes</p>
+  <h2>Measured. Stratified. Adversarial-tested.</h2>
+  <div class="numbers">
+    <div class="number-card green">
+      <div class="value">100%</div>
+      <div class="label">Router accuracy</div>
+      <div class="sub">104 stratified eval cases · 41 adversarial</div>
+    </div>
+    <div class="number-card green">
+      <div class="value">100%</div>
+      <div class="label">Adversarial pass rate</div>
+      <div class="sub">Keyword traps · drift cases · negation</div>
+    </div>
+    <div class="number-card">
+      <div class="value">40-60%</div>
+      <div class="label">Token savings vs all-Opus</div>
+      <div class="sub">Mixed-task goals · measured per session</div>
+    </div>
+    <div class="number-card">
+      <div class="value">21 + N</div>
+      <div class="label">Agents</div>
+      <div class="sub">23 core + pack agents (installable)</div>
+    </div>
+    <div class="number-card">
+      <div class="value">24 + N</div>
+      <div class="label">Skills</div>
+      <div class="sub">All with examples, anti-patterns, verifiers</div>
+    </div>
+    <div class="number-card">
+      <div class="value">6</div>
+      <div class="label">Portable runtimes</div>
+      <div class="sub">Claude Code · Cowork · claude.ai · ChatGPT · Cursor · Gemini</div>
+    </div>
+  </div>
+</section>
+
+<section id="packs">
+  <p class="section-title">Domain Packs</p>
+  <h2>Install the pack that matches your role. Add more as you grow.</h2>
+  <div class="pack-list">
+    <div class="pack-item"><span class="name">pack-founder-uae</span><span class="ship">v0.2 · shipped</span></div>
+    <div class="pack-item"><span class="name">pack-ai-builder</span><span class="ship">v0.2 · shipped</span></div>
+    <div class="pack-item"><span class="name">pack-growth-ops</span><span class="ship">v0.2 · shipped</span></div>
+    <div class="pack-item"><span class="name">pack-investor-ops</span><span class="ship soon">coming v1.4</span></div>
+    <div class="pack-item"><span class="name">pack-ceo-rhythms</span><span class="ship soon">coming v1.4</span></div>
+    <div class="pack-item"><span class="name">pack-content-system</span><span class="ship soon">coming v1.4</span></div>
+  </div>
+</section>
+
+<section>
+  <p class="section-title">Run it everywhere</p>
+  <h2>Same CEO discipline. Six runtimes.</h2>
+  <pre><span style="color: var(--muted);"># Claude Code (full plugin with real subagents)</span>
+/plugin marketplace add https://github.com/themeetpatel/god-mode
+/plugin install themeetpatel@themeetpatel
+/god-mode &lt;your goal&gt;
+
+<span style="color: var(--muted);"># Cowork / claude.ai / ChatGPT / Cursor / Gemini</span>
+<span style="color: var(--muted">→ paste portable/universal-system-prompt.md into the tool's instructions</span></pre>
+</section>
+
+<footer>
+  <div class="row">
+    <div>
+      <strong style="color: var(--text);">themeetpatel</strong> · God Mode v1.3.0 · MIT
+    </div>
+    <div>
+      <a href="https://github.com/themeetpatel/god-mode">GitHub</a> ·
+      <a href="https://github.com/themeetpatel/god-mode/blob/main/CHANGELOG.md">Changelog</a> ·
+      <a href="https://github.com/themeetpatel/god-mode/blob/main/CONTRIBUTING.md">Contribute</a>
+    </div>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>
